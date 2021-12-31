@@ -1,6 +1,11 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
+import Test from '../views/Test.vue';
+import HelloWorld from '../components/HelloWorld.vue'
+import Provider from '../components/Provider.vue'
+import Funds from '../components/Funds.vue'
+import Amortization from '../components/Amortization.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +14,31 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: Test
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: HelloWorld
+  },
+  {
+    path: '/provider',
+    name: 'provider',
+    component: Provider
+  },
+  {
+    path: '/funds',
+    name: 'funds',
+    component: Funds
+  },
+  {
+    path: '/amortization',
+    name: 'amortization',
+    component: Amortization
   },
   {
     path: '/about',
@@ -21,6 +51,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode: "history",
   routes
 })
 
