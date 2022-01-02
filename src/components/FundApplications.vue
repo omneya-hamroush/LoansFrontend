@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-row justify="center">
-            <p class="p">Fund Applications Table</p>
+            <p class="p">Your Fund Applications Table</p>
          
 
             </v-row>
@@ -23,6 +23,8 @@
  
   
   </v-data-table>
+                               <v-btn type="submit" @click="logout" color="primary" elevation="2" plain x-large style="margin-top: 350px;margin-left: 480px;">Logout</v-btn>
+
     </v-container>
 </template>
 <script>
@@ -55,6 +57,39 @@ export default {
         
      }
   },
+  methods:{
+     
+   
+
+       logout()
+
+      {
+         const token = localStorage.getItem("token");
+         console.log(`Token ${token}`)
+         let uri = 'http://127.0.0.1:8000/api/users/logout/';
+         this.axios.delete(uri, { headers: {"Authorization" : `Token ${token}`,  "Content-Type": 'application/json'} }).then((response) => {
+                  
+                  console.log("ggggggggg")
+                  console.log(response.data)
+                  localStorage.removeItem("funds")
+                  localStorage.removeItem("loans")
+                  localStorage.removeItem("token")
+                  localStorage.removeItem("table")
+                  localStorage.removeItem("loanapps")
+                  localStorage.removeItem("fundapps")
+                  localStorage.removeItem("amount")
+                  localStorage.removeItem("id")
+                  localStorage.removeItem("allfundapps")
+                  localStorage.removeItem("allloanapps")
+                  localStorage.removeItem("payments")
+                  this.$router.push('login')
+                  
+                 
+                 
+                  
+              });
+      },
+  }
 }
 </script>
 <style scoped>

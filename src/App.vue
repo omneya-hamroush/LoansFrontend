@@ -17,10 +17,10 @@
       <!-- <v-btn -->
        
       
-       <!-- <form class="form-inline my-2 my-log-0">
+       <form class="form-inline my-2 my-log-0">
          <router-link class="nav-link" to="/login">Login</router-link>
 
-       </form> -->
+       </form>
       <!-- </v-btn> -->
     </v-app-bar>
 

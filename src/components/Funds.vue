@@ -22,6 +22,7 @@
   >
 
   <template v-slot:item="{ item }">
+    <!-- <tr :class="item === selectedRow ? 'custom-highlight-row' : ''" @click="onClickItem(item)"> -->
         <tr :class="selectedRows.indexOf(item.id)>-1?'cyan':''" @click="onClickItem(item)">
             <td>{{item.id}}</td>
             <td>{{item.minimum}}</td>
@@ -37,6 +38,7 @@
     
            <v-btn type="submit" @click="createFund" color="primary" style="margin-top:100px" elevation="2" plain x-large>Create Fund</v-btn>
            <v-btn type="submit" @click="amortization" color="primary" style="margin-top:100px; margin-left:450px;" elevation="2" plain x-large>Amortization table</v-btn>
+                             <v-btn type="submit" @click="logout" color="primary" elevation="2" plain x-large style="margin-top: 150px;margin-left: 740px;">Logout</v-btn>
 
     </v-container>
 </template>
@@ -56,7 +58,8 @@ export default {
         
         //  v-if="awesome"
         // display = false,
-       selectedRows: [{name:'Eclair'}],
+      //  selectedRow: null,
+      selectedRows: [{name:'Eclair'}],
         headers: [
           {
             text: 'ID',
@@ -78,7 +81,35 @@ export default {
   },
    methods: 
    {
+       logout()
 
+      {
+         const token = localStorage.getItem("token");
+         console.log(`Token ${token}`)
+         let uri = 'http://127.0.0.1:8000/api/users/logout/';
+         this.axios.delete(uri, { headers: {"Authorization" : `Token ${token}`,  "Content-Type": 'application/json'} }).then((response) => {
+                  
+                  console.log("ggggggggg")
+                  console.log(response.data)
+                  localStorage.removeItem("funds")
+                  localStorage.removeItem("loans")
+                  localStorage.removeItem("token")
+                  localStorage.removeItem("table")
+                  localStorage.removeItem("loanapps")
+                  localStorage.removeItem("fundapps")
+                  localStorage.removeItem("amount")
+                  localStorage.removeItem("id")
+                  localStorage.removeItem("allfundapps")
+                  localStorage.removeItem("allloanapps")
+                  localStorage.removeItem("payments")
+                  this.$router.push('login')
+                  
+                 
+                 
+                  
+              });
+      },
+       
        amortization(){
         let uri = 'http://127.0.0.1:8000/api/amortization/';
            this.axios.get(uri, {params: {

@@ -11,7 +11,12 @@ import Customer from '../components/Customer.vue'
 import LoanApplications from '../components/LoanApplications.vue'
 import Loans from '../components/Loans.vue'
 import BankP from '../components/BankP.vue'
-
+import AllFunds from '../components/AllFunds.vue'
+import AllLoans from '../components/AllLoans.vue'
+import AddLoan from '../components/AddLoan.vue'
+import AddFund from '../components/AddFund.vue'
+import Payments from '../components/Payments.vue'
+import Pay from '../components/Pay.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -69,6 +74,36 @@ const routes = [
     path: '/bankp',
     name: 'bankp',
     component: BankP
+  },
+  {
+    path: '/allfunds',
+    name: 'allfunds',
+    component: AllFunds
+  },
+  {
+    path: '/allloans',
+    name: 'allloans',
+    component: AllLoans
+  },
+  {
+    path: '/addfund',
+    name: 'addfund',
+    component: AddFund
+  },
+  {
+    path: '/addloan',
+    name: 'addloan',
+    component: AddLoan
+  },
+  {
+    path: '/payments',
+    name: 'payments',
+    component: Payments
+  },
+  {
+    path: '/pay',
+    name: 'pay',
+    component: Pay
   },
   {
     path: '/about',

@@ -11,8 +11,12 @@
          <v-btn type="submit" @click="fetchLoans" color="primary" elevation="2" plain x-large style="margin-top: -190px;">Show Loans</v-btn>
 
           <v-btn type="submit" @click="fetchLoanapps" color="primary" elevation="2" plain x-large style="margin-top: 200px; margin-left: -170px;">View Loan Applications</v-btn>
-       
-        
+                 <v-btn type="submit" @click="payments" color="primary" elevation="2" plain x-large style="margin-left: 400px;
+    margin-top: 200px;">View Payments</v-btn>
+
+                     <v-btn type="submit" @click="logout" color="primary" elevation="2" plain x-large style="margin-top: 100px;
+    margin-left: 780px;">Logout</v-btn>
+
  
 
     </v-container>
@@ -33,6 +37,48 @@ export default {
   },
     
     methods: {
+     payments()
+     {
+    let uri = 'http://127.0.0.1:8000/api/getpayments/';
+         this.axios.get(uri, {params: {
+                  user_id: localStorage.getItem("id")
+                  }}).then((response) => {
+                    console.log(response.data)
+                    localStorage.setItem("payments", JSON.stringify(response.data.data))
+                    this.$router.push('payments')
+                  })
+     },
+      logout()
+
+      {
+
+
+         const token = localStorage.getItem("token");
+         console.log(`Token ${token}`)
+         let uri = 'http://127.0.0.1:8000/api/users/logout/';
+         this.axios.delete(uri, { headers: {"Authorization" : `Token ${token}`,  "Content-Type": 'application/json'} }).then((response) => {
+                  
+                  console.log("ggggggggg")
+                  console.log(response.data)
+                  localStorage.removeItem("funds")
+                  localStorage.removeItem("loans")
+                  localStorage.removeItem("token")
+                  localStorage.removeItem("table")
+                  localStorage.removeItem("loanapps")
+                  localStorage.removeItem("fundapps")
+                  localStorage.removeItem("amount")
+                  localStorage.removeItem("id")
+                  localStorage.removeItem("allfundapps")
+                  localStorage.removeItem("allloanapps")
+                  localStorage.removeItem("payments")
+                  this.$router.push('login')
+                  
+                 
+                 
+                  
+              });
+      },
+       
        
        fetchLoans()
             {
