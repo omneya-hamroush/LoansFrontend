@@ -6,6 +6,11 @@ import HelloWorld from '../components/HelloWorld.vue'
 import Provider from '../components/Provider.vue'
 import Funds from '../components/Funds.vue'
 import Amortization from '../components/Amortization.vue'
+import FundApplications from '../components/FundApplications.vue'
+import Customer from '../components/Customer.vue'
+import LoanApplications from '../components/LoanApplications.vue'
+import Loans from '../components/Loans.vue'
+import BankP from '../components/BankP.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +44,31 @@ const routes = [
     path: '/amortization',
     name: 'amortization',
     component: Amortization
+  },
+  {
+    path: '/fundapplications',
+    name: 'fundapplications',
+    component: FundApplications
+  },
+  {
+    path: '/customer',
+    name: 'customer',
+    component: Customer
+  },
+  {
+    path: '/loans',
+    name: 'loans',
+    component: Loans
+  },
+  {
+    path: '/loanapplications',
+    name: 'loanapplications',
+    component: LoanApplications
+  },
+  {
+    path: '/bankp',
+    name: 'bankp',
+    component: BankP
   },
   {
     path: '/about',

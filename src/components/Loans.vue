@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <p class="e">Choose a fund:</p>
+        <p class="e">Choose a loan:</p>
          <v-data-table
 
 
@@ -8,7 +8,7 @@
 
 
     :headers="headers"
-    :items="funds"
+    :items="loans"
     :items-per-page="5"
     class="elevation-1"
     v-model="selectedRows"
@@ -35,7 +35,7 @@
   </v-data-table>
     
     
-           <v-btn type="submit" @click="createFund" color="primary" style="margin-top:100px" elevation="2" plain x-large>Create Fund</v-btn>
+           <v-btn type="submit" @click="createLoan" color="primary" style="margin-top:100px" elevation="2" plain x-large>Create Loan</v-btn>
            <v-btn type="submit" @click="amortization" color="primary" style="margin-top:100px; margin-left:450px;" elevation="2" plain x-large>Amortization table</v-btn>
 
     </v-container>
@@ -44,13 +44,10 @@
 import axios from "axios"
 
 export default {
-    name: 'Funds',
+    name: 'Loans',
     data(){
-        var storedFunds = JSON.parse(localStorage.getItem("funds"));
-        // var list = []
-        // for(i=0; i<storedFunds.length; i++){
-        //     list. 
-        // }
+        var storedLoans = JSON.parse(localStorage.getItem("loans"));
+        
 
      return {
         
@@ -70,7 +67,7 @@ export default {
           { text: 'Term (years)', value: 'duration' },
           
         ],
-        funds: storedFunds
+        loans: storedLoans
         
       
         
@@ -83,7 +80,7 @@ export default {
         let uri = 'http://127.0.0.1:8000/api/amortization/';
            this.axios.get(uri, {params: {
                   amount: parseInt(localStorage.getItem("amount")),
-                  fund_id: this.data.id
+                  loan_id: this.data.id
                   }}).then((response) => {
                   // this.tickets = response.data;
                   console.log("ggggggggg")
@@ -98,23 +95,47 @@ export default {
                   
               });
        },
-       createFund(){
+
+       createLoan1()
+       {
+        let uri = 'http://127.0.0.1:8000/api/addloan/';
+           this.axios.post(uri, {params: {
+                  amount: parseInt(localStorage.getItem("amount")),
+                  loan_id: this.data.id
+                  }}).then((response) => {
+                  // this.tickets = response.data;
+                  console.log("ggggggggg")
+                  console.log(response.data)
+                //   localStorage.setItem("table", JSON.stringify(response.data.amortization_table))
+                //   localStorage.setItem("amount", this.amount)
+                //   this.$router.push('amortization')
+                  
+                //   this.results = response.data
+                //   this.funds = response.data.data
+                  
+                  
+              });
+       },
+       createLoan(){
 
         //    var storedNames = JSON.parse(localStorage.getItem("funds"));
-        //    console.log(storedNames)
-    console.log(typeof(this.data.id))
+           console.log("----------")
+    console.log(this.data.id)
+    console.log(parseInt(localStorage.getItem("amount")))
             axios({
   method: "post",
-  url: 'http://127.0.0.1:8000/api/addfund/?',
+  url: 'http://127.0.0.1:8000/api/addloan/?',
   timeout: 1000 * 5, // Wait for 5 seconds
-  headers: {
+   headers: {
     "Content-Type": "application/json"
   },
   data: {
-    
+     
     amount: parseInt(localStorage.getItem("amount")),
-    fund_id: this.data.id,
+    loan_id: this.data.id,
+    
   }
+  
 })
   .then(response => {
     // const serverResponse = response.data;
@@ -125,7 +146,7 @@ export default {
      
   })
   .catch(error => {
-    console.log(error);
+    console.log(error.response.data);
 });
        },
 

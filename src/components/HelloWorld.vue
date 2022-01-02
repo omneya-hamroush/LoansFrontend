@@ -69,6 +69,7 @@
         </h2> -->
 
         <v-row justify="center">
+           <p class="p">User Login</p>
           <!-- <a
             v-for="(link, i) in importantLinks"
             :key="i"
@@ -178,7 +179,8 @@ import axios from "axios";
 //         }
 
 
-
+console.log(typeof(this.email))
+console.log(typeof(this.password))
 
         axios({
   method: "post",
@@ -196,8 +198,15 @@ import axios from "axios";
     // const serverResponse = response.data;
     console.log(response.data)
     localStorage.setItem("token", response.data.token)
+    localStorage.setItem("id", response.data.id)
     if(response.data.is_loan_provider == true){
        this.$router.push('provider')
+    }
+    if(response.data.is_loan_customer == true){
+       this.$router.push('customer')
+    }
+    if(response.data.is_bank_personnel == true){
+       this.$router.push('bankp')
     }
     
      
@@ -210,3 +219,12 @@ import axios from "axios";
   }
   }
 </script>
+<style scoped>
+.p {
+    font-family: Avenir;
+    font-weight: bold;
+    font-size: 48px;
+    color: steelblue;
+    margin-top: -300px;
+}
+</style>
